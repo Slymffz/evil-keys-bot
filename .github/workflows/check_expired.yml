@@ -1,31 +1,52 @@
 name: Verificar e Desativar Keys Expiradas
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 on:
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   check-expired:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: read
+      
     steps:
       - name: Checkout do código
-        uses: actions/checkout@v4          # ← ATUALIZADO para v4
-
-      - name: Configurar Python
-        uses: actions/setup-python@v5      # ← ATUALIZADO para v5
+        uses: actions/checkout@v4
         with:
-          python-version: '3.11'           # ← Python 3.11 (mais estável)
-
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
       - name: Desativar keys expiradas
-        run: python3 check_expired.py
-
-      - name: Commit e Push
         run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
+          python3 check_expired.py
+          echo "Status do script: $?"
+        
+      - name: Verificar mudanças
+        id: verificar
+        run: |
+          if git diff --staged --quiet && git diff --quiet; then
+            echo "sem_mudancas=true" >> $GITHUB_OUTPUT
+          else
+            echo "sem_mudancas=false" >> $GITHUB_OUTPUT
+          fi
+        
+      - name: Commit e Push
+        if: steps.verificar.outputs.sem_mudancas == 'false'
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git pull origin main --rebase
           git add keys.json
-          git diff --staged --quiet || git commit -m "🤖 Auto: Desativando keys expiradas"
+          git commit -m "🤖 Auto: Desativando keys expiradas"
           git push
