@@ -1,20 +1,20 @@
 {
   "keys": [
     {
-      "key": "EYE",
+      "key": "BOSSALUGUELKEY",
       "plan": "vitalicio",
       "created_at": "2026-01-20T10:00:00Z",
       "expires_at": null,
       "active": true,
-      "user": "admin@admin.com"
+      "user": "bossaluguel@admin.com"
     },
     {
-      "key": "EYE-TESTE-1234-ABCD",
+      "key": "ADMINKEY",
       "plan": "vitalicio",
       "created_at": "2026-01-20T10:00:00Z",
       "expires_at": null,
       "active": true,
-      "user": "teste@teste.com"
+      "user": "eqphazz@teste.com"
     }
   ]
 }
