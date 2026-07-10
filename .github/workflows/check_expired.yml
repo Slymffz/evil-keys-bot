@@ -10,16 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout do código
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4          # ← ATUALIZADO para v4
 
       - name: Configurar Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5      # ← ATUALIZADO para v5
         with:
-          python-version: '3.10'
-
-      - name: Instalar dependências
-        run: |
-          python -m pip install --upgrade pip
+          python-version: '3.11'           # ← Python 3.11 (mais estável)
 
       - name: Desativar keys expiradas
         run: python3 check_expired.py
