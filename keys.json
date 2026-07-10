@@ -1,6 +1,8 @@
 {
-  "keys": [
-    "KEY1",
-    "BOSSALUGUELKEY"
-  ]
+  "key": "BOSSALUGUELKEY",
+  "plan": "mensal",
+  "created_at": "2026-07-10T10:00:00Z",
+  "expires_at": "2026-08-10T10:00:00Z",
+  "active": true,
+  "user": "cliente@email.com"
 }
