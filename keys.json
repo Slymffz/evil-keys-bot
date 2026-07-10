@@ -17,11 +17,11 @@
       "user": "eqphazz@email.com"
     }
     {
-      "key": "teste",
+      "key": "TESTE",
       "plan": "mensal",
       "created_at": "2026-07-10T10:00:00Z",
       "expires_at": "2026-07-05T10:00:00Z",
-      "active": true,
+      "active": false,
       "user": "teste@gmail.com"
     }
   ]
