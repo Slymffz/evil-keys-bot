@@ -28,25 +28,27 @@ jobs:
           python-version: '3.11'
           
       - name: Desativar keys expiradas
-        run: |
-          python3 check_expired.py
-          echo "Status do script: $?"
-        
-      - name: Verificar mudanças
-        id: verificar
-        run: |
-          if git diff --staged --quiet && git diff --quiet; then
-            echo "sem_mudancas=true" >> $GITHUB_OUTPUT
-          else
-            echo "sem_mudancas=false" >> $GITHUB_OUTPUT
-          fi
+        run: python3 check_expired.py
         
       - name: Commit e Push
-        if: steps.verificar.outputs.sem_mudancas == 'false'
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git pull origin main --rebase
+          
+          # Adiciona as mudanças
           git add keys.json
+          
+          # Verifica se há mudanças para commitar
+          if git diff --staged --quiet; then
+            echo "ℹ️ Nenhuma mudança para commitar"
+            exit 0
+          fi
+          
+          # Commit
           git commit -m "🤖 Auto: Desativando keys expiradas"
+          
+          # Puxa mudanças remotas com rebase
+          git pull origin main --rebase --strategy-option=theirs || true
+          
+          # Push
           git push
