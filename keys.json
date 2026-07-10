@@ -21,8 +21,9 @@
       "plan": "diario",
       "created_at": "2026-07-10T10:00:00Z",
       "expires_at": "2026-01-02T10:00:00Z",
-      "active": true,
-      "user": "teste@teste.com"
+      "active": false,
+      "user": "teste@teste.com",
+      "desativado_em": "2026-07-10T13:54:15.306108+00:00"
     }
   ]
 }
