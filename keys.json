@@ -9,7 +9,7 @@
       "user": "bossaluguel@admin.com"
     },
     {
-      "key": "ADMINKEY1",
+      "key": "ADMINKEY",
       "plan": "vitalicio",
       "created_at": "2026-01-20T10:00:00Z",
       "expires_at": null,
@@ -17,12 +17,12 @@
       "user": "eqphazz@teste.com"
     },
     {
-  "key": "EYE-TESTE-EXPIRA-9999",
-  "plan": "diario",
-  "created_at": "2026-01-01T10:00:00Z",
-  "expires_at": "2026-01-02T10:00:00Z",  // ← DATA NO PASSADO!
-  "active": true,
-  "user": "teste@teste.com"
+      "key": "EYE-EXPIRADA-9999-XXXX",
+      "plan": "diario",
+      "created_at": "2026-07-10T10:00:00Z",
+      "expires_at": "2026-01-02T10:00:00Z",
+      "active": true,
+      "user": "teste@teste.com"
     }
   ]
 }
